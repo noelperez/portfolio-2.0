@@ -1,0 +1,27 @@
+@import '../../../global.scss';
+.skill-container {
+    display: flex;
+    align-items: center;
+    background-color: lightblue;
+    height: 50px;
+    width: 95%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+
+    .skill-experience {
+        background-color: $maincolor;
+        color: white;
+        height: 90%;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        
+    }
+
+    p {
+        text-align: center;
+    }
+}

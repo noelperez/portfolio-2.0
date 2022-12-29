@@ -1,0 +1,23 @@
+{
+  "name": "note-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "code.js",
+  "scripts": {
+    "start": "nodemon ./index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noelperez/Note-taking-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noelperez/Note-taking-App/issues"
+  },
+  "homepage": "https://github.com/noelperez/Note-taking-App#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}

@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.background {
+    background: rgb(52, 166, 251);
+    table-layout: fixed;
+    border-spacing: 0;
+    
+}
+
+.backgroud td { padding: 0; }
+.lava { background: #ff6464; }
+.wall { background: white; }
+.monster { background: chartreuse;}
+
+
+.actor { position: absolute; } 
+.coin { background: rgb(241, 229, 89); }
+.player { background: rgb(43, 24, 211); }
+
+.lost .player {
+    background: rgb(160, 64, 64);
+}
+
+.won .player {
+    box-shadow: -4px -7px 8px white, 4px -7px 8px white; 
+}
+
+.game {
+    margin: 0;
+    overflow: hidden;
+    max-width: 800px;
+    max-height: 450px;
+    position: relative;
+    border-radius: 10px;
+    
+}
+
+#gamecontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+html {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    height: 100vh;
+    flex-direction: column;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.header {
+    margin: 30px 0;
+}
+
+.center {
+    width: 60%;
+    text-align: justify;
+}
+
+.center h2 {
+    text-align: center;
+    margin: 0;
+}
+
+.center p {
+    font-family:'Courier New', Courier, monospace;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.left {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: ;
+}
+
+.left img {
+    width: 80px;
+}
+
+.right {
+    margin-right: 10px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.right p {
+    text-align: justify;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+
+
+
+

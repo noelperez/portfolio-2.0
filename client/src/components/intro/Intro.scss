@@ -1,0 +1,178 @@
+@import '../../global.scss';
+
+
+
+.intro {
+    background-color: white;
+    height: 100%;
+
+   @include mobile {
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    } 
+    
+    //overflow-y: hidden;
+
+
+    display: flex;
+
+    .left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 0.5;
+        background-color: inherit;
+        overflow-y: hidden;
+        width: 100%;
+        height: 100%;
+
+        position: relative;
+
+       /*  @include mobile {
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            
+
+        } */
+
+
+
+        .imgContainer {
+
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            overflow-y: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 800px;
+            height: 800px;
+            background-color: crimson;
+
+            @include mobile {
+                top: 0;
+                     
+            }
+            img {
+
+                filter: hue-rotate();
+                position: absolute;
+                width: 900px;
+                
+
+                @include mobile {
+                    width: 600px;
+                    top: -150px;
+
+                
+                }
+
+
+
+            }
+        }
+    }
+
+    .right {
+        flex: 0.5;
+        display: flex;
+
+        flex-direction: column;
+
+        @include mobile {
+            align-items: center;
+                
+        }
+
+
+
+
+        .wrapper {
+
+            width: 100%;
+            height: 100%;
+
+            > * {
+                margin-left: 20px;
+            }
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+
+
+
+            @include mobile {
+                width: 100%;
+                align-items: center;
+            }
+
+
+            h1 {
+                font-size: 60px;
+
+                @include mobile {
+                    font-size: 60px;
+                }
+            }
+
+            h2 {
+                font-size: 35px;
+            }
+
+            h3 {
+                font-size: 30px;
+
+                span {
+                    font-size: inherit;
+                    color: crimson;
+                }
+            }
+
+            p {
+                margin: 40px 10px;
+                font-size: 25px;
+                text-align: justify;
+                padding: 0 10px;
+            }
+
+        }
+
+
+
+        a {
+
+            
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+
+            img {
+
+                width: 100%;
+                height: 100%;
+                animation: moveEffect 2s infinite;
+            }
+
+            @keyframes moveEffect {
+
+                100% {
+                    opacity: 0;
+                }
+
+            }
+        }
+
+
+
+
+    }
+
+}

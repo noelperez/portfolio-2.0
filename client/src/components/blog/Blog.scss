@@ -1,0 +1,22 @@
+.blog {
+
+    width: 100vw;
+    margin: 0 auto;
+    height: calc(100vh - 70px);
+    position: relative;
+    top: 70px;
+    color: rgb(0, 0, 0);
+    //background-color: antiquewhite;
+
+    .sectionTitle { 
+        height: 100px;
+        text-align: center;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+
+
+}

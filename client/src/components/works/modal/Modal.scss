@@ -1,0 +1,17 @@
+.modal {
+    width: 900px;
+    height: 600px;
+    background-color: bisque;
+    display: none;
+    
+    border-radius: 30px;
+
+    &.active {
+
+        z-index: 4;
+        display: block;
+
+
+    }
+
+}

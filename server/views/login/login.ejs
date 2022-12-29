@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../login/login.css">
+
+    <title>Noel Codes |</title>
+</head>
+<body>
+
+    <h1>Login or <a href="/blog/users/new">Signup</a></h1> 
+
+    <form action="/blog/users/login" method="post">
+        <span id="errors"><%= locals.errors %></span>
+
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" value=<%= locals.email %>>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <input type="submit" value="Login" id="button">
+
+
+    </form>
+    <script src="../../login/login.js"></script>
+    
+</body>
+</html>
