@@ -16,7 +16,7 @@ import MongoStore from 'connect-mongo';
 
 
 const DB_URL = 'mongodb://127.0.0.1:27017/portfolio';
-const PORT = process.env.PORT || 3000; 
+const PORT = process.env.PORT || 80; 
 
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
