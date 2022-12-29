@@ -42,19 +42,19 @@ app.set('views', './views');
 app.use(cors());
 app.use(bodyParser.json({ limite: '15 mb'}));
 app.use(bodyParser.urlencoded({ limit: '15 mb'}));
-app.use(express.static('../build'));
+app.use(express.static('../client/build'));
 
 
 /* Projects' static files */
 
-app.use(express.static('../projects/dehanta'));
-app.use(express.static('../projects/note-app'));
-app.use(express.static('../projects/platformgame'));
-app.use(express.static('../projects/unit-conversion-app'));
-app.use(express.static('../projects/loginui'));
-app.use(express.static('../projects/underconstruction'));
+app.use(express.static('../client/projects/dehanta'));
+app.use(express.static('../client/projects/note-app'));
+app.use(express.static('../client/projects/platformgame'));
+app.use(express.static('../client/projects/unit-conversion-app'));
+app.use(express.static('../client/projects/loginui'));
+app.use(express.static('../client/projects/underconstruction'));
 app.use(express.static('./views'));
-app.use(express.static('./public'));
+app.use(express.static('../client/public'));
 
 /* Routes */
 

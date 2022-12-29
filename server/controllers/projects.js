@@ -5,24 +5,38 @@ import path from 'path';
 const serveProject = async (req, res) => {
     
     const project = req.params.projectName;
+
+    try {
+        
+        let projects =  await fsPromises.readdir(path.join(process.cwd(), "..", "client","projects"));
+        
+
     
-    let projects =  await fsPromises.readdir(path.join(process.cwd(), "..","projects"));
-    console.log(projects, project);
+        /* if the provided project doesn't exists */
 
-    /* if the provided project doesn't exists */
-    if (!projects.includes(project)) {
+        if (!projects.includes(project)) {
+    
+            if (project == 'blog' || project == 'skillsharing') {
 
-        if (project == 'blog' || project == 'skillsharing') {
-            return res.sendFile(path.join(process.cwd(), "..", "projects", `underconstruction`, "index.html"));
-        } else {
-            return res.send(`What is this project '${project}'?`);
-            
+                return res.sendFile(path.join(process.cwd(), "..", "client", "projects", `underconstruction`, "index.html"));
+
+            } else {
+
+                return res.send(`What is this project '${project}'?`);
+                
+            }
+        
         }
 
+        console.log('sending file')
+        res.sendFile(path.join(process.cwd(), "..", "client", "projects", `${project}`, "index.html"));
 
+    } catch (e) {
+        console.log(`Something went wrong while attempting to serve the project '${project}': e`);
+        res.send({ message: `Something went wrong while attempting to serve the project '${project}'`, error: e});
+        
     }
-    console.log('sending file')
-    res.sendFile(path.join(process.cwd(), "..", "projects", `${project}`, "index.html"));
+    
 };
 
 

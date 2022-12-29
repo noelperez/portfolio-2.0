@@ -37,7 +37,7 @@ export const featuredPortfolio = [
     },
     {
       id: 4,
-      name: 'skillsharring',
+      name: 'skillsharing',
       title: "Skill Sharing App",
       img: "assets/skillsharingapp.png",
     },
