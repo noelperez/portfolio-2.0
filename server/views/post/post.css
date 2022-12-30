@@ -220,6 +220,75 @@ p img {
     margin: auto;
 }
 
+/* Comment section */
+
+.comment-section {
+    
+    width: 80%;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+.comment-section .comment {
+    border-top: 1px solid black;
+    padding-top: 15px;
+    padding-left: 32px;
+    margin: 15px 0;
+    border-left: 1px dashed #AAA
+}
+
+.comment-footer {
+    background-color: rgb(229, 223, 223);
+    margin-top: 15px;
+}
+
+.comment-footer span {
+    
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+textarea {
+    min-width: 60%;
+    min-height: 8em;
+    display: block;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 18px;
+
+}
+
+.leave-comment {
+    margin: 15px 0;
+}
+
+.leave-comment p {
+    font-style: italic;
+    color: red;
+    margin: 15px 0;
+}
+.leave-comment b {
+    
+    padding: 15px 0;
+    display: block;
+}
+
+form button {
+
+    font-size: 18px;
+    height: 40px;
+    background-color: green;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    border: none;
+    margin: 15px 0;
+    padding: 0 10px;
+    cursor: pointer;
+
+}
+
 /* Responsive design */
 
 
@@ -257,6 +326,10 @@ p img {
 
     p img {
         width: 90vw;
+    }
+
+    textarea {
+        width: 100%;
     }
     
 }

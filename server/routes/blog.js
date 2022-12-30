@@ -52,13 +52,7 @@ router.get('/posts/:postID', async (req, res, next) => {
     let post;
     let user;
     let profilePic;
-
-
-
     
-
-    
-
     try {
 
 
@@ -87,6 +81,36 @@ router.get('/posts/:postID', async (req, res, next) => {
 
 
 
+
+})
+
+router.post('/posts/newcomment', async (req, res) => {
+    const { post_id, author, content, createdAt } = req.body;
+    let post;
+    let user;
+
+    try {
+        post = await Post.findOne({ _id: post_id});
+
+        post.comments = [...post.comments, {
+            author,
+            content,
+            createdAt: new Date(Number(createdAt)).toString().slice(0, 24)
+        }]
+
+        await post.save();
+        res.redirect(`${post_id}#comment-section`);
+        
+    } catch (e) {
+        console.log(`Something went wrong while trying to save the comment: ${e}`);
+        res.send({
+            message: `Something went wrong while trying to save the comment`,
+            error: e
+        });
+        
+    }
+
+    
 
 })
 

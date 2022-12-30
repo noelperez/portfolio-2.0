@@ -2,17 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 import projectsRouter from './routes/projects.js';
 import postsRouter from './routes/posts.js';
 import usersRouter from './routes/users.js';
 import blogRouter from './routes/blog.js';
 import errorController from './controllers/errorController.js';
-import session from 'express-session';
-import MongoStore from 'connect-mongo';
-
-
-
-
 
 
 const DB_URL = 'mongodb://127.0.0.1:27017/portfolio';
