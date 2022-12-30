@@ -125,7 +125,58 @@
         <p id="content-holder" style="display: none;">
             <%= locals.post.content %>
         </p>
+
+
+
     </div>
+    <div class="comment-section" id="comment-section">
+        
+        <b>Comments:</b>
+        
+        
+        <% if (post.comments.length > 0) { %>
+            <% for (let comment of post.comments) {%>
+        
+                <div class="comment">
+                    <p> <%= comment.content %> </p>
+                    <div class="comment-footer">
+                        <span> <%= comment.author %> </span> - <%= comment.createdAt %> 
+                    </div>
+                </div>
+            
+                <% } %> 
+            
+            <% } %>
+            
+            <div class="leave-comment">
+                 
+                <b>Leave a comment: </b>
+
+                <% if (locals.user) {%>
+
+                    <form action="/blog/posts/newcomment" method="post">
+                        <input type="hidden" name="post_id" value=<%= `${post._id.toString()}` %> >
+                        <input type="hidden" name="author" value='<%= `${user.firstName} ${user.lastName}` %>' >
+                        <input type="hidden" name="createdAt" value=<%= `${Date.now()}` %> >
+                        <label for="comment-body"></label>
+                        <textarea name="content" id="content"></textarea>
+                        <button type="submit">Send comment</button>
+                    </form>
+                    
+                    <% } else { %> 
+
+                        <p> Only logged in users can leave comments.</p>
+                        
+                        <% } %> 
+
+                        
+
+
+            </div>
+    </div>
+    
+
+
 
     <!--     <div class="comment-box">
         <div class="comment-inner-box">
