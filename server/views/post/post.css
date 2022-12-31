@@ -236,6 +236,10 @@ p img {
     margin: 15px 0;
     border-left: 1px dashed #AAA
 }
+.comment-section .comment p { 
+
+    white-space: pre-line;
+}
 
 .comment-footer {
     background-color: rgb(229, 223, 223);
@@ -330,6 +334,7 @@ form button {
 
     textarea {
         width: 100%;
+        white-space: pre;
     }
     
 }
