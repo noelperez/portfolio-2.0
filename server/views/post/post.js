@@ -18,6 +18,7 @@ let postBody = document.getElementById('post-body');
   hljs.configure({   // optionally configure hljs
     languages: ['javascript', 'ruby', 'python']
   });
+  hljs.highlightAll();
   
  quill.setContents(JSON.parse(content.innerText).postFull);
  postBody.innerHTML = quill.root.innerHTML;

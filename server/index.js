@@ -51,6 +51,7 @@ app.use(express.static('../client/projects/loginui'));
 app.use(express.static('../client/projects/underconstruction'));
 app.use(express.static('./views'));
 app.use(express.static('../client/public'));
+app.use(express.static('./public'));
 
 /* Routes */
 
