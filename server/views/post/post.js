@@ -1,4 +1,6 @@
 const content = document.querySelector('#content-holder');
+const form = document.querySelector('form');
+let postBody = document.getElementById('post-body');
 
  const quill = new Quill('#editor', {
     modules: {
@@ -12,17 +14,24 @@ const content = document.querySelector('#content-holder');
       },
     theme: 'snow'
   });
-  
- quill.setContents(JSON.parse(content.innerText).postFull);
- //console.log(JSON.parse(content.innerText))
- 
 
- let postBody = document.getElementById('post-body');
- 
- postBody.innerHTML = quill.root.innerHTML;
-
- hljs.configure({   // optionally configure hljs
+  hljs.configure({   // optionally configure hljs
     languages: ['javascript', 'ruby', 'python']
   });
+  
+ quill.setContents(JSON.parse(content.innerText).postFull);
+ postBody.innerHTML = quill.root.innerHTML;
 
-hljs.highlightAll();
+ form.onsubmit = (e) => {
+   e.preventDefault();
+   
+   return e.target.content.value === '' ? false : e.target.submit();
+ 
+  }
+ 
+
+
+ 
+ 
+
+
