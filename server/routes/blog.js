@@ -85,7 +85,7 @@ router.get('/posts/:postID', async (req, res, next) => {
 })
 
 router.post('/posts/newcomment', async (req, res) => {
-    const { post_id, author, content, createdAt } = req.body;
+    const { post_id, comment_id, author, content, createdAt } = req.body;
     let post;
     let user;
 
@@ -95,11 +95,12 @@ router.post('/posts/newcomment', async (req, res) => {
         post.comments = [...post.comments, {
             author,
             content,
-            createdAt: new Date(Number(createdAt)).toString().slice(0, 24)
+            comment_id: comment_id,
+            createdAt: `${new Date(Number(createdAt)).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} - ${new Date(Number(createdAt)).toLocaleTimeString()}`
         }]
 
         await post.save();
-        res.redirect(`${post_id}#comment-section`);
+        res.redirect(`${post_id}#${comment_id}`);
         
     } catch (e) {
         console.log(`Something went wrong while trying to save the comment: ${e}`);
