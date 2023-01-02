@@ -22,14 +22,23 @@ let postBody = document.getElementById('post-body');
   
  quill.setContents(JSON.parse(content.innerText).postFull);
  postBody.innerHTML = quill.root.innerHTML;
- console.log('hello there')
 
- form.onsubmit = (e) => {
-   e.preventDefault();
-   
-   return e.target.content.value === '' ? false : e.target.submit();
- 
-  }
+if (form) {
+
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    
+    return e.target.content.value === '' ? false : e.target.submit();
+  
+   }
+
+}
+
+  console.log();
+
+  console.log(document.getElementsByTagName('img'))
+
+  document.querySelector("meta[name=imgtag]").content = 'just putting something here.';
  
 
 
