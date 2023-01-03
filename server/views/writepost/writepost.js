@@ -1,3 +1,4 @@
+oldPost = document.querySelector('#oldPost');
 
 const quill = new Quill('#editor', {
   modules: {
@@ -16,8 +17,15 @@ hljs.configure({   // optionally configure hljs
   languages: ['javascript']
 });
 
-//hljs.highlightAll();
+if (oldPost) {
+  let { title, content } = JSON.parse(oldPost.value);
+  document.querySelector('input[name=title]').value = title
+  quill.setContents(JSON.parse(content).postFull);
 
+  let form = document.querySelector('form');
+
+
+}
 
 
 
@@ -30,14 +38,11 @@ hljs.configure({   // optionally configure hljs
     console.log(`content value: ${content}, content innerText ${content.innerText}`);
     console.log(`quill text value: ${quill.getText()}`);
     return true;
-    
-
-
-    
-    
-    
-    
   }
+
+
+
+
  
 
   

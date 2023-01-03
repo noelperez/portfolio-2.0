@@ -2,6 +2,7 @@ const content = document.querySelector('#content-holder');
 const form = document.querySelector('form');
 let postBody = document.getElementById('post-body');
 
+
  const quill = new Quill('#editor', {
     modules: {
         syntax: true,
@@ -22,6 +23,7 @@ let postBody = document.getElementById('post-body');
   
  quill.setContents(JSON.parse(content.innerText).postFull);
  postBody.innerHTML = quill.root.innerHTML;
+ console.log(postBody.innerHTML);
 
 if (form) {
 
@@ -33,13 +35,6 @@ if (form) {
    }
 
 }
-
-  console.log();
-
-  console.log(document.getElementsByTagName('img'))
-
-  document.querySelector("meta[name=imgtag]").content = 'just putting something here.';
- 
 
 
  
