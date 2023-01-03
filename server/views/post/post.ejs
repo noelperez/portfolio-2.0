@@ -132,9 +132,21 @@
     </h1>
     <div class="post-header">
         <span class="posted-on">Posted on <%= post.createdAt.toString().slice(0, 24) %>, </span>
-        <span class="posted-by">by <%= post.author %> </span>
+        <span class="posted-by">by <%= post.author.firstName + ' ' + post.author.lastName %> </span>
     </div>
+    <% if (locals.user && locals.user._id.toString() == post.author._id.toString()) {%> 
+
+        <div class="buttons">
+            
+            <label for="edit-post" class="edit-button">
+    
+                <a href=<%= '/posts/newpost/' + post._id.toString() %>  id="edit-post"> Edit post </a>
+    
+            </label>
+        </div>
+        <% } %>
     <div class="post-body" id="post-body">
+
         <p id="content-holder" style="display: none;">
             <%= locals.post.content %>
         </p>
@@ -153,7 +165,7 @@
                 <div class="comment" id=<%= comment.comment_id ? `${comment.comment_id}` : ''  %> >
                     <p> <%= comment.content %> </p>
                     <div class="comment-footer">
-                        <span> <%= comment.author %> </span> - <%= comment.createdAt %> 
+                        <span> <%= comment.author %> </span> - <%= `${new Date(Number(comment.createdAt)).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} - ${new Date(Number(comment.createdAt)).toLocaleTimeString()}` %> 
                     </div>
                 </div>
             

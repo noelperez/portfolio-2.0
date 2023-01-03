@@ -96,7 +96,8 @@ router.post('/posts/newcomment', async (req, res) => {
             author,
             content,
             comment_id: comment_id,
-            createdAt: `${new Date(Number(createdAt)).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} - ${new Date(Number(createdAt)).toLocaleTimeString()}`
+            createdAt: Date.now()
+            //createdAt: `${new Date(Number(createdAt)).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} - ${new Date(Number(createdAt)).toLocaleTimeString()}`
         }]
 
         await post.save();

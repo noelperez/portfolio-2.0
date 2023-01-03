@@ -133,7 +133,7 @@
                 <div class="top">
                     <h3> <%= post.title %> </h3>
                     <p class="postHeader">
-                        by <span class="postAuthor"><%=post.author%>.</span>
+                        by <span class="postAuthor"><%=post.author.firstName%>.</span>
                          Posted on: <span class="postDate"><%= post.createdAt.toString().slice(0, 24) %> </span>
                     </p>
                 </div>

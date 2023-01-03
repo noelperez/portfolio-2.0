@@ -9,7 +9,7 @@ const postSchema = mongoose.Schema({
     },
     tags: [String],
     author: { 
-        type: String,
+        type: Object,
         required: true
     }, 
     comments: {
