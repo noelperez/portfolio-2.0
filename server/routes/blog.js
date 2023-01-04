@@ -115,5 +115,36 @@ router.post('/posts/newcomment', async (req, res) => {
     
 
 })
+router.post('/posts/editpost', async (req, res) => {
+    const { post_id, comment_id, author, content, createdAt } = req.body;
+    let post;
+    let user;
+
+    try {
+        post = await Post.findOne({ _id: post_id});
+
+        post.comments = [...post.comments, {
+            author,
+            content,
+            comment_id: comment_id,
+            createdAt: Date.now()
+            //createdAt: `${new Date(Number(createdAt)).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} - ${new Date(Number(createdAt)).toLocaleTimeString()}`
+        }]
+
+        await post.save();
+        res.redirect(`${post_id}#${comment_id}`);
+        
+    } catch (e) {
+        console.log(`Something went wrong while trying to save the comment: ${e}`);
+        res.send({
+            message: `Something went wrong while trying to save the comment`,
+            error: e
+        });
+        
+    }
+
+    
+
+})
 
 export default router;

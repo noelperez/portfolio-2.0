@@ -9,10 +9,13 @@ import postsRouter from './routes/posts.js';
 import usersRouter from './routes/users.js';
 import blogRouter from './routes/blog.js';
 import errorController from './controllers/errorController.js';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 
-const DB_URL = 'mongodb://127.0.0.1:27017/portfolio';
-const PORT = process.env.PORT || 80; 
+const DB_URL = process.env.MONGO_URL;
+const PORT = process.env.PORT || 3000; 
 
 mongoose.connect(DB_URL, {
     useNewUrlParser: true,
@@ -26,7 +29,7 @@ mongoose.connect(DB_URL, {
 
 const app = express();;
 app.use(session({
-    secret: 'secretPassword',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
