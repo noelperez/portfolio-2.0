@@ -11,6 +11,7 @@ import Menu from './components/menu/Menu';
 import Blog from './components/blog/Blog';
 import Sections from './Sections';
 import { useState } from 'react';
+import Chat from './components/chat/Chat';
 
 function App() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -31,10 +32,13 @@ function App() {
         <Contact />
 
       </div>
+      <Chat/>
+      
 
 
 
     </div>
+    
   );
 }
 
