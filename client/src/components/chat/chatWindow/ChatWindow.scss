@@ -1,0 +1,108 @@
+.chat-window {
+    position: absolute;
+    height: 600px;
+    width: 366px;
+    border-radius: 10px;
+    display: none;
+    flex-direction: column;
+    right: 40px;
+    bottom: 40px;
+    background-color: rgb(205, 211, 213);
+    z-index: 100;
+    border: 1px solid red;
+
+
+    .top {
+        display: flex;
+        width: 100%;
+        flex: 1;
+        background-color: crimson;
+        color: white;
+
+        .top-left {
+            flex: 3;
+        }
+        .top-right {
+            flex: 1;
+
+            svg {
+                margin: 10px;
+                float: right;
+                cursor: pointer;
+            }
+        }
+
+
+    }
+
+    .center {
+        width: 100%;
+        flex: 5;
+    }
+
+    .bottom {
+        display: flex;
+        width: 100%;
+        flex: 1;
+        background-color: white;
+    }
+
+    textarea {
+        font-size: 15px;
+        border: none;
+        resize: none;
+        outline: none;
+        padding: 16px;
+        padding-top: 10px;
+        box-sizing: border-box;
+        flex: 3;
+
+        /* width */
+        &::-webkit-scrollbar {
+            width: 5px;
+            padding: 0 10px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: red;
+            border-radius: 10px;
+
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+            background: #b30000;
+        }
+
+    }
+
+    .bottom-right {
+        flex: 1;
+        border-left: 1px solid red;
+    }
+
+    .icons {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            font-size: 30px;
+
+            &:hover {
+                color: #b30000;
+                cursor: pointer;
+            }
+        }
+        
+    }
+}
