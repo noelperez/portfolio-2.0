@@ -13,6 +13,7 @@ import * as dotenv from 'dotenv';
 import { createServer } from 'http';
 import { upgradeHandler } from './wss.js';
 import { WebSocketServer } from 'ws';
+import UserModel from './models/user.js';
 
 dotenv.config();
 
@@ -83,3 +84,41 @@ mongoose.connect(DB_URL, {
         upgradeHandler(request, socket, head, sessionParser, wss);
     });
 });
+
+
+wss.on('connection', (ws, request) => {
+    console.log(`Connection emmitted finally, sending message to: ${ws._id}`);
+    ws.send(
+        JSON.stringify(
+            {
+                code: 0,
+                content: `Welcome! Total online users: ${Array.from(wss.clients).length}`,
+                timestamp: Date.now()
+            }
+        )
+    );
+
+    wss.clients.forEach(async (client) => {
+        let user;
+
+        try {
+            user = await UserModel.findOne({ _id: ws._id});
+        } catch (e) {
+
+            console.log(`Error while attempting to retrieve user: ${e}`);
+            
+        }
+        if (client != ws) {
+            client.send(
+                JSON.stringify(
+                    {
+                        code: 0,
+                        content: `${user.firstName} ${user.lastName} joined the chat`,
+                        timestamp: Date.now()
+                    }
+                )
+            )
+
+        }
+    })
+})

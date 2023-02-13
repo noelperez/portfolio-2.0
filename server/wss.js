@@ -1,12 +1,9 @@
 import UserModel from './models/user.js';
 
+
 export const upgradeHandler = (request, socket, head, sessionParser, wss) => {
 
-    wss.on('connection', (ws, request) => {
-        
 
-
-    });
 
     sessionParser(request, {}, () => {
         if (!request.session._id) {
@@ -18,6 +15,9 @@ export const upgradeHandler = (request, socket, head, sessionParser, wss) => {
 
         wss.handleUpgrade(request, socket, head, (ws) => {
             ws._id = request.session._id;
+
+            console.log(`initiating event ${wss.clients}`)
+            wss.emit('connection', ws, request);
 
             
             ws.on('message', async (data) => {
@@ -48,9 +48,31 @@ export const upgradeHandler = (request, socket, head, sessionParser, wss) => {
                 });
             });
 
-            ws.on('close', () => {
-                console.log('Client closed the connection');
-                ws.send('hey');
+            ws.on('close', async () => {
+
+                let user;
+
+                try {
+                    user = await UserModel.findOne({ _id: ws._id});
+                } catch (error) {
+
+                    console.log(`Error while attempting to retrieve user: ${e}`);
+                    
+                }
+                wss.clients.forEach((client) => {
+                    if (client != ws) {
+                        client.send(
+                            JSON.stringify(
+                                {
+                                    code: 0,
+                                    content: `${user.firstName} ${user.lastName} abandoned the chat`,
+                                    timestamp: Date.now()
+                                }
+                            )
+                        )
+                    }
+                })
+
             })
             ws.on('open', () => {
                 ws.send(
