@@ -25,7 +25,7 @@ const Intro = () => {
 
         <div className="imgContainer">
 
-          <img src='assets/03.png' alt="person" />
+          <img src='assets/03.pngd' alt="person" />
           
           </div>
 

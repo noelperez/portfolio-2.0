@@ -11,6 +11,8 @@ export const createUser = async (req, res, next) => {
     if (req.file) {
         profilePic = await readFile(req.file.path);
         await unlink(req.file.path);
+    } else {
+        profilePic = await readFile('./imgUploads/avatar.png')
     }
 
     let user;

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../blog.css">
     <title>
         Noel Codes | Blog
-        
+
     </title>
 </head>
 
@@ -56,54 +56,55 @@
 
                         <div class="userInfo">
                             <p class="user-header">Name: <span class="user-data">
-                                <% if (locals.user) {%>
-                                    <%= locals.user.firstName + ' ' + locals.user.lastName %>
-                                    <% } %>  
-    
+                                    <% if (locals.user) {%>
+                                        <%= locals.user.firstName + ' ' + locals.user.lastName %>
+                                            <% } %>
+
                                 </span></p>
                             <p class="user-header">Member since: <span class="user-data">
-                                <% if (locals.user) {%>
-                                    <%= new Date(locals.user.createdAt).toString().slice(0, 24) %>
-                                    <% } %>  
-    
+                                    <% if (locals.user) {%>
+                                        <%= new Date(locals.user.createdAt).toString().slice(0, 24) %>
+                                            <% } %>
+
                                 </span></p>
                         </div>
                         <div class="avatar"
                             onclick="document.getElementById('login-card').style.display == 'none' ?  document.getElementById('login-card').style.display = 'block' : document.getElementById('login-card').style.display = 'none' ">
                             <% if (locals.user) {%>
-                                <img src=<%='data:image/png;base64,' + locals.user.profilePic.toString('base64') %> alt="">
-                        
+                                <img src=<%='data:image/png;base64,' + locals.user.profilePic.toString('base64') %>
+                                alt="">
+
                                 <% } %>
-                        
-                        
+
+
                         </div>
 
                         <div class="login-card" id="login-card" style="display: none;">
                             <div class="log-out">
                                 <a href="/blog/users/logout">Log out</a>
                             </div>
-                            
+
                         </div>
 
-                        
 
-    
+
+
                     </div>
-                    
-                    <% } %> 
 
-                    <% if (!locals.user) {%>
+                    <% } %>
 
-                        <label for="login" class="login-button">
-                
-                            <a href="./users/login" id="login"> Login </a>
-                
-                        </label>
-                        <% } %> 
+                        <% if (!locals.user) {%>
+
+                            <label for="login" class="login-button">
+
+                                <a href="./users/login" id="login"> Login </a>
+
+                            </label>
+                            <% } %>
 
 
 
-<!--                 <div class="hamburger">
+                                <!--                 <div class="hamburger">
                     <span class="line1"></span>
                     <span class="line2"></span>
                     <span class="line3"></span>
@@ -114,61 +115,144 @@
     <h1>Blog Posts</h1>
 
 
- 
 
-    <div class="posts"> 
-        <% if (locals.user && locals.user.role == 'admin') {%> 
+
+    <div class="posts">
+        <% if (locals.user && locals.user.role=='admin' ) {%>
 
             <label for="write-post" class="post-button">
-    
+
                 <a href="/posts/newpost" id="write-post"> Write a post </a>
-    
+
             </label>
-            <% } %> 
-
-
-
-        <% for (let post of locals.posts) { %>
-            <div class="post">
-                <div class="top">
-                    <h3> <%= post.title %> </h3>
-                    <p class="postHeader">
-                        by <span class="postAuthor"><%=post.author.firstName%>.</span>
-                         Posted on: <span class="postDate"><%= post.createdAt.toString().slice(0, 24) %> </span>
-                    </p>
-                </div>
-                <div class="center">
-                    <p class="post-short"><%= JSON.parse(post.content).postShort %> ... [<a href=<%= '/blog/posts/' + post._id %> >Continue reading</a>]</p>
-                </div>
-                <div class="bottom">
-                    <div class="views">
-                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="VisibilityIcon"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg> <%= post.visits %> visits
-                    </div>
-                    <div class="comments">
-                        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CommentIcon"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"></path></svg> <%= post.comments.length %> 
-                    </div>
-                    <div class="tags">
-                        Tags: <% for (let tag of post.tags) {%>
-                            &nbsp;<a href=""><%=tag%>,</a> 
-                                    <% } %>
-                
-                    </div>
-                </div>
-
-            </div>
             <% } %>
-              
+
+
+
+                <% for (let post of locals.posts) { %>
+                    <div class="post">
+                        <div class="top">
+                            <h3>
+                                <%= post.title %>
+                            </h3>
+                            <p class="postHeader">
+                                by <span class="postAuthor">
+                                    <%=post.author.firstName%>.
+                                </span>
+                                Posted on: <span class="postDate">
+                                    <%= post.createdAt.toString().slice(0, 24) %>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="center">
+                            <p class="post-short">
+                                <%= JSON.parse(post.content).postShort %> ... [<a href=<%='/blog/posts/' + post._id %>
+                                        >Continue reading</a>]
+                            </p>
+                        </div>
+                        <div class="bottom">
+                            <div class="views">
+                                <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
+                                    aria-hidden="true" viewBox="0 0 24 24" data-testid="VisibilityIcon">
+                                    <path
+                                        d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z">
+                                    </path>
+                                </svg>
+                                <%= post.visits %> visits
+                            </div>
+                            <div class="comments">
+                                <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv" focusable="false"
+                                    aria-hidden="true" viewBox="0 0 24 24" data-testid="CommentIcon">
+                                    <path
+                                        d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z">
+                                    </path>
+                                </svg>
+                                <%= post.comments.length %>
+                            </div>
+                            <div class="tags">
+                                Tags: <% for (let tag of post.tags) {%>
+                                    &nbsp;<a href="">
+                                        <%=tag%>,
+                                    </a>
+                                    <% } %>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <% } %>
+
     </div>
 
     <div class="editorWrapper" style="display: none;">
-        
-        <div id="editor" ></div>
+
+        <div id="editor"></div>
     </div>
 
+    <!-- chat component -->
 
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script src="../blog.js"></script>
-    <script src="blog.js"></script>
+    <% if (locals.user) {%>
+
+        <div class="chat-global">
+
+            <div class="chat-container" id='chat-container'>
+
+                <div class='chat'>
+                    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+                        focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ModeCommentIcon">
+                        <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z">
+                        </path>
+                    </svg>
+
+                </div>
+                <div class="dot"></div>
+
+
+            </div>
+            <ChatWindow />
+
+        </div>
+
+        <div class='chat-window' id='chat-window'>
+
+            <div class="top">
+              <div class="top-left">
+                  <div class="online-users"></div>
+                  <div class="status"> Status: <span class="current-status"> Online </span></div>
+              </div>
+              <div class="top-right">
+                <div class="controls">
+                    <svg id = "close-window" class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="CloseIcon"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+      
+                </div>
+              </div>
+            </div>
+            <div class="center" id="messages-contaier">
+
+            </div>
+            <div class="bottom">
+      
+             <textarea autofocus placeholder='Write your message here' name="" id=""  ></textarea>
+             <div class="bottom-right">
+               <div class="icons">
+                <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root" focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="SendIcon"><path d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+               </div>
+             </div>
+      
+            </div>
+              
+            
+          </div>
+
+
+        <% } %>
+
+
+
+
+            <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+            <script src="../blog.js"></script>
+            <script src="blog.js"></script>
 
 
 
