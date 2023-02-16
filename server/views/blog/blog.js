@@ -64,9 +64,9 @@ chat.onclick = (e) => {
 
       console.log(`All div and p elements created`);
 
-      const new_message = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-message-pop-alert-2354.mp3');
+      //const new_message = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-message-pop-alert-2354.mp3');
 
-      await new_message.play();
+      //await new_message.play();
       console.log(`Attempted to play music`);
       
       messageHolder.className = 'message_holder';
