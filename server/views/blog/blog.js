@@ -52,6 +52,7 @@ chat.onclick = (e) => {
     let { code, user, content, timestamp } = JSON.parse(e.data);
     
     const handleUserMessage = async () => {
+      console.log(`handleUserMessage function hit`);
 
       let messageHolder = document.createElement('div');
       let tempMessage = document.createElement('div');
@@ -61,9 +62,12 @@ chat.onclick = (e) => {
       let profilePicture = document.createElement('img');
       let userName = document.createElement('p');
 
+      console.log(`All div and p elements created`);
+
       const new_message = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-message-pop-alert-2354.mp3');
 
       await new_message.play();
+      console.log(`Attempted to play music`);
       
       messageHolder.className = 'message_holder';
       tempMessage.className = `${ code == 1 ? 'user_message' : 'system_message'}`;
@@ -72,6 +76,8 @@ chat.onclick = (e) => {
       userName.className = 'user_name';
       stats.className = 'stats';
       stats.setAttribute('id', 'stats');
+
+      console.log(`Assigned all classes`);
   
   
       tempText.innerText = content;
@@ -86,6 +92,9 @@ chat.onclick = (e) => {
       messageHolder.appendChild(userHolder);
       chatContainer.appendChild(messageHolder);
       chatContainer.scrollTo(0, chatContainer.scrollHeight);
+
+      console.log(`Appended all childs, end of function`);
+
 
 
     }
