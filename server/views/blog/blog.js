@@ -37,6 +37,9 @@ chatCloseIcon.onclick = (e) => {
 
 }
 chat.onclick = (e) => {
+  
+
+
   socket = new WebSocket(`ws://${location.host}`);
   socket.onopen = (e) => {
     console.log(`websocket connection established: ${e}`);
@@ -61,9 +64,15 @@ chat.onclick = (e) => {
       let profilePicture = document.createElement('img');
       let userName = document.createElement('p');
 
-      const new_message = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-message-pop-alert-2354.mp3');
+      // Playing sounds for desktop devices only.
+      if ( !/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile/i.test(navigator.userAgent) ) {
+        const new_message = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-message-pop-alert-2354.mp3');
 
-      await new_message.play();
+        await new_message.play();
+    
+      }
+
+
       
       messageHolder.className = 'message_holder';
       tempMessage.className = `${ code == 1 ? 'user_message' : 'system_message'}`;
@@ -97,9 +106,14 @@ chat.onclick = (e) => {
       let tempText = document.createElement('p');
       
 
-      const new_message = new Audio('https://notificationsounds.com/storage/sounds/file-sounds-1230-pretty-good.mp3');
-
-      await new_message.play();
+      // Playing sounds for desktop devices only.
+      if ( !/Mobile|iP(hone|od|ad)|Android|BlackBerry|IEMobile/i.test(navigator.userAgent) ) {
+        
+        const new_message = new Audio('https://notificationsounds.com/storage/sounds/file-sounds-1230-pretty-good.mp3');
+  
+        await new_message.play();
+    
+      }
       
       
       messageHolder.className = 'message_holder_system';
