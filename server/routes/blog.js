@@ -4,10 +4,44 @@ import Post from '../models/posts.js';
 import { blogMain } from '../controllers/blog.js';
 import { readFile } from 'fs/promises';
 import { read } from 'fs';
+import nodemailer from 'nodemailer';
+
 
 const router = express.Router();
 
+
+
 router.get('/', async (req, res, next) => {
+    
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASS
+        }
+    });
+
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: 'noel999@gmail.com',
+        subject: `[Portfolio Event] - New Blog Visitor`,
+        text: 
+        `IP: ${req.ip},
+        SocketIP: ${req.socket.remoteAddress},
+        timeStamp: ${new Date()}
+        `
+    }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log(`Email sent. Info: ${info.response}`)
+        }
+
+
+    })
+    
     let posts;
     let user;
 
