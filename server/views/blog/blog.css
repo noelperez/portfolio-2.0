@@ -392,7 +392,7 @@ svg {
     opacity: 1;
 }
 
-svg {
+.chat svg {
     fill: white;
 }
 
