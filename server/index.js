@@ -14,6 +14,7 @@ import { createServer } from 'http';
 import { upgradeHandler } from './wss.js';
 import { WebSocketServer } from 'ws';
 import UserModel from './models/user.js';
+import { logRequest } from './siteLogs.js';
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.use(sessionParser);
 app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(cors());
+
 app.use(bodyParser.json({ limite: '15 mb'}));
 app.use(bodyParser.urlencoded({ limit: '15 mb'}));
 app.use(express.static('../client/build'));
@@ -60,7 +62,7 @@ app.use(express.static('../client/public'));
 app.use(express.static('./public'));
 
 /* Routes */
-
+app.use(logRequest);
 app.use('/projects', projectsRouter);
 app.use('/posts', postsRouter);
 app.use('/blog', blogRouter);
@@ -87,7 +89,6 @@ mongoose.connect(DB_URL, {
 
 
 wss.on('connection', (ws, request) => {
-    console.log(`Connection emmitted finally, sending message to: ${ws._id}`);
     ws.send(
         JSON.stringify(
             {
