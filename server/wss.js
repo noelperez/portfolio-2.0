@@ -1,4 +1,5 @@
 import UserModel from './models/user.js';
+import chatLogsModel from './models/chatLogs.js';
 
 
 export const upgradeHandler = (request, socket, head, sessionParser, wss) => {
@@ -13,23 +14,38 @@ export const upgradeHandler = (request, socket, head, sessionParser, wss) => {
             return;
         }
 
-        wss.handleUpgrade(request, socket, head, (ws) => {
+        wss.handleUpgrade(request, socket, head, async (ws) => {
             ws._id = request.session._id;
+            let chatLogs;
 
-            console.log(`initiating event ${wss.clients}`)
             wss.emit('connection', ws, request);
 
-            
+            try {
+                chatLogs = await chatLogsModel({
+                    senderID: ws._id,
+                    totalOnlineUsers: wss.clients.size,
+                    eventType: 'CONNECTION_ESTABLISHED',
+                    onlineUsers: Array.from(wss.clients).map((client) => { return client._id})
+
+                });
+                chatLogs.save();
+                console.log('Chat log successfully saved');
+            } catch (e) {
+                console.log(`An error occurred while attempting to save a chatlog: ${e}`)
+
+            }
+
+
             ws.on('message', async (data) => {
                 let user;
-                console.log(ws._id);
+                let chatLogs;
 
-            
+
 
                 try {
                     user = await UserModel.findOne({ _id: ws._id }, { password: 0, _id: 0, confirmPassword: 0, createdAt: 0, email: 0, gender: 0 });
-                    
-                    user = {...user, profilePic: user.profilePic ? user.profilePic.toString('base64') : ''};
+
+                    user = { ...user, profilePic: user.profilePic ? user.profilePic.toString('base64') : '' };
 
                 } catch (e) {
                     console.log(`Error while retrieve user with ws._id: ${e}`);
@@ -37,7 +53,9 @@ export const upgradeHandler = (request, socket, head, sessionParser, wss) => {
                 }
 
                 wss.clients.forEach((client) => {
+                    console.log(`logging the client: ${client._id}`);
                     if (client !== ws) {
+
                         client.send(JSON.stringify({
                             code: 1,
                             user: user,
@@ -46,18 +64,55 @@ export const upgradeHandler = (request, socket, head, sessionParser, wss) => {
                         }));
                     }
                 });
+
+                // Saving the MESSAGE_SENT event log. The message is saved as plain text.
+                //TODO:
+                // - Create a single module for storing chat logs.
+                // - Create a model for general public site logs (IP, device used, and which endpoint was hit)
+                //   and for logged in users, create its own site log (unique user visits).
+
+                try {
+                    chatLogs = await chatLogsModel({
+                        senderID: ws._id,
+                        totalOnlineUsers: wss.clients.size,
+                        eventType: 'MESSAGE_SENT',
+                        onlineUsers: Array.from(wss.clients).map((client) => { return client._id}),
+                        message: `${data}`
+
+                    });
+                    chatLogs.save();
+                    console.log('Chat log successfully saved');
+                } catch (e) {
+                    console.log(`An error occurred while attempting to save a chatlog: ${e}`)
+
+                }
             });
 
             ws.on('close', async () => {
 
                 let user;
+                let chatLogs;
+
+                
+                
 
                 try {
-                    user = await UserModel.findOne({ _id: ws._id});
-                } catch (error) {
+                    user = await UserModel.findOne({ _id: ws._id });
+                    // Logging client disconnection.
+                     chatLogs = await chatLogsModel({
+                        senderID: ws._id,
+                        totalOnlineUsers: wss.clients.size,
+                        eventType: 'USER_DISCONNECTED',
+                        onlineUsers: Array.from(wss.clients).map((client) => { return client._id})
+
+                    });
+                    chatLogs.save();
+                    console.log('Chat log successfully saved');
+                } catch (e) {
 
                     console.log(`Error while attempting to retrieve user: ${e}`);
-                    
+                    console.log(`An error occurred while attempting to save a chatlog: ${e}`)
+
                 }
                 wss.clients.forEach((client) => {
                     if (client != ws) {
@@ -84,7 +139,7 @@ export const upgradeHandler = (request, socket, head, sessionParser, wss) => {
                         }
                     )
                 )
-                
+
                 console.log(`Total clients connected: ${Array.from(wss.clients).length}`)
 
             });
