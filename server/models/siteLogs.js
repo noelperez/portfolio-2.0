@@ -6,20 +6,19 @@ const siteSchema = mongoose.Schema({
         default: Date.now()
     },
     url: {
-        type: String,
-        required: true
+        type: String
+
     },
     method: {
-        type: String,
-        required: true
+        type: String
+
     },
     IP: {
-        type: String,
-        required: true
+        type: String
+
     },
     headers: {
-        type: Array,
-        required: true
+        type: Array
     }
 })
 

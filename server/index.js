@@ -46,6 +46,7 @@ app.use(cors());
 
 app.use(bodyParser.json({ limite: '15 mb'}));
 app.use(bodyParser.urlencoded({ limit: '15 mb'}));
+app.use(logRequest);
 app.use(express.static('../client/build'));
 
 
@@ -62,7 +63,7 @@ app.use(express.static('../client/public'));
 app.use(express.static('./public'));
 
 /* Routes */
-app.use(logRequest);
+
 app.use('/projects', projectsRouter);
 app.use('/posts', postsRouter);
 app.use('/blog', blogRouter);
