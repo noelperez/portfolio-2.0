@@ -10,7 +10,8 @@ export const logRequest = async (req, res, next) => {
             url: req.originalUrl,
             method: req.method,
             IP: req.socket.remoteAddress || req.connection.remoteAddress,
-            headers: req.rawHeaders
+            headers: req.rawHeaders,
+            timeStamp: Date.now()
         });
 
         requestLog.save();
