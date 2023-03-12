@@ -25,7 +25,8 @@ export const upgradeHandler = (request, socket, head, sessionParser, wss) => {
                     senderID: ws._id,
                     totalOnlineUsers: wss.clients.size,
                     eventType: 'CONNECTION_ESTABLISHED',
-                    onlineUsers: Array.from(wss.clients).map((client) => { return client._id})
+                    onlineUsers: Array.from(wss.clients).map((client) => { return client._id}),
+                    timeStamp: Date.now()
 
                 });
                 chatLogs.save();
